@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="https://lucide.dev/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NWZ Tactical Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- HTML2PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" referrerpolicy="no-referrer" defer></script>
+    <style>
+      body {
+        background-color: #0f172a; /* slate-900 */
+      }
+      
+      /* Force white background on body when printing to ensure no dark bleed-through */
+      body.printing-mode {
+          background-color: #ffffff !important;
+          margin: 0;
+          padding: 0;
+          overflow: visible;
+      }
+
+      /* Hide scrollbars during print mode */
+      body.printing-mode::-webkit-scrollbar {
+          display: none;
+      }
+      
+      body.printing-mode #root {
+          width: 100%;
+          height: auto;
+          overflow: visible;
+      }
+
+      /* PDF Export Specifics */
+      .pdf-page-break {
+          page-break-after: always;
+      }
+      
+      .break-inside-avoid {
+          break-inside: avoid;
+          page-break-inside: avoid;
+      }
+
+      /* Native Print Styles (Fallback) */
+      @media print {
+          @page {
+              margin: 10mm;
+              size: A4 portrait;
+          }
+
+          body {
+              background-color: white !important;
+              color: black !important;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+          }
+          #root {
+              display: none !important;
+          }
+          /* Ensure printable area is visible and formatted for A4 */
+          #printable-area {
+              display: block !important;
+              width: 100% !important;
+              max-width: none !important;
+              margin: 0 !important;
+              padding: 0 !important;
+              box-shadow: none !important;
+              position: static !important;
+          }
+          /* Hide print controls */
+          [data-html2canvas-ignore="true"] {
+              display: none !important;
+          }
+          /* Reset text colors */
+          * {
+              color: black !important;
+              text-shadow: none !important;
+              background-color: transparent !important;
+          }
+          
+          /* Force diagrams to be visible */
+          img {
+              max-width: 100% !important;
+              display: block !important;
+          }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.1"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
